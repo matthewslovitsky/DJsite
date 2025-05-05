@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="design.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <script type="module" src="trialwaveform.js"></script>    <!-- Load WaveSurfer.js -->
+    <!-- <script type="module" src="player-two.js"></script>    Load WaveSurfer.js -->
+    <!-- <script type="module" src="fader.js"></script> -->
+    
+
+    <script src="https://unpkg.com/wavesurfer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/wavesurfer.js@7/dist/plugins/timeline.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/essentia.js@latest/dist/essentia-wasm.web.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/essentia.js@latest/dist/essentia.js-core.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/essentia.js@latest/dist/essentia-wasm.web.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/essentia.js@latest/dist/essentia.js-core.js"></script>
+    <script type="module" src="https://unpkg.com/metallicss@4.0.3/dist/metallicss.min.js"></script>
+    <script src="input-knobs.js"></script>
+</head>
+<body>
+    <div id = "settings">
+        <button id="connectBtn">Connect to Arduino</button>
+    </div>
+<div class = "player-container">
+    <div class="player-one" >
+       
+        <div class = player>
+            <div class="knob-container-left">
+                <div class="knob-control">
+                    <label for="filter-knob-left" class="knob-label">HIGH PASS FILTER</label>
+                    <input type="range" id="filter-knob-left" class="input-knob" data-bgcolor="#ffffff" data-fgcolor="#000000" min="20" max="5000" step="1" value="20" />
+                </div>
+                <div class="knob-control">
+                    <label for="low-knob-left" class="knob-label">LOW PASS FILTER</label>
+                    <input type="range" id="low-knob-left" class="input-knob" data-bgcolor="#ffffff" data-fgcolor="#000000" min="20" max="5000" step="1" value="20" />
+                </div>
+            </div>
+            <input type="file" id="fileInput" accept="audio/*">
+            
+
+        <label>
+            <br>
+           
+        </label>
+            <div id="waveform"></div>
+
+            <div class="volume-slider">
+                <div class="volume-icon">
+                    <span class="material-symbols-outlined">volume_down</span>
+                </div>
+                <div class="range-slider">
+                    <input type="range" min="0" max="100" value="50" class="slider"/>
+                    <div class="progress"></div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button class="btn" id="btnPrev">
+                    <span class="material-symbols-outlined">fast_rewind</span>
+                </button>
+                <button class="btn-main" id="mainPlayBtn">
+                    <span class="material-symbols-outlined">play_arrow</span>
+                </button>
+                <button class="btn" id="btnNext">
+                    <span class="material-symbols-outlined">fast_forward</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="player-two">
+        <div class = player>
+            <div class="knob-container-right">
+                <div class="knob-control">
+                    <label for="filter-knob-right" class="knob-label">HIGH PASS FILTER</label>
+                    <input type="range" id="filter-knob-right" class="input-knob" data-bgcolor="#ffffff" data-fgcolor="#000000" min="20" max="5000" step="1" value="20" />
+                </div>
+                <div class="knob-control">
+                    <label for="low-knob-right" class="knob-label">LOW PASS FILTER</label>
+                    <input type="range" id="low-knob-right" class="input-knob" data-bgcolor="#ffffff" data-fgcolor="#000000" min="20" max="5000" step="1" value="20" />
+                </div>
+            </div>
+            <input type="file" id="fileInput-two" accept="audio/*">
+
+        <label>
+            <br>
+            
+        </label>
+            <div id="waveform-two"></div>
+
+            <div class="volume-slider-two">
+                <div class="volume-icon-two">
+                    <span class="material-symbols-outlined">volume_down</span>
+                </div>
+                <div class="range-slider-two">
+                    <input type="range" min="0" max="100" value="50" class="slider-two"/>
+                    <div class="progress-two"></div>
+                </div>
+            </div>
+
+            <div class="controls-two">
+                <button class="btn" id="btnPrev-two">
+                    <span class="material-symbols-outlined">fast_rewind</span>
+                </button>
+                <button class="btn-main" id="mainPlayBtn-two">
+                    <span class="material-symbols-outlined">play_arrow</span>
+                </button>
+                <button class="btn" id="btnNext-two">
+                    <span class="material-symbols-outlined">fast_forward</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class = "control-container">
+    <div class = "left-section">
+        <div id="scratch-container-left">
+            <div id="scratch-disk-left"></div>
+          </div>
+        <div class = "left-vol-container">
+            <input type="range" min="0" max="100" value="100" class = "vol-slider" id = "vol-slider-one">
+            <header class = "vol-tag-right">VOLUME</header>
+            
+        </div>
+      
+
+    </div>
+
+        <div class = "left-control">
+            <header>LEFT CONTROL</header> 
+            <header id = "bpm-one">BPM: </header>
+
+            <div class = buttons-container>
+                <button class = "music-control">1/4</button>
+                <button class = "music-control">1/2</button>
+                <button class = "music-control">1</button>
+                <button class = "music-control" id="four-left">4</button>
+                <button class = "music-control" id = "eight-left">8 </button>
+                <button class = "music-control">16</button>
+            </div>
+            <div class = "sync-container">
+                <button class = "sync-button-one">SYNC BPM</button>
+            </div>
+        </div>
+           
+        
+    
+    <div class = "crossfader-container">
+        <input type="range" min="0" max="100" value="50" class = "crossfader" id = "crossfader">
+    </div>
+    <div class = "right-control">
+        <header>RIGHT CONTROL</header>
+        <header id = "bpm-two">BPM: </header>
+        <div class = "buttons-container">
+            <button class = "music-control">1/4</button>
+            <button class = "music-control">1/2</button>
+            <button class = "music-control">1</button>
+            <button class = "music-control">4</button>
+            <button class = "music-control">8</button>
+            <button class = "music-control">16</button>
+        </div>
+        <div class = "sync-container">
+            <button class = "sync-button-two">SYNC BPM</button>
+        </div>
+    </div>
+    <div class = "right-section">
+        <div class = "right-vol-container">
+            <input type="range" min="0" max="100" value="100" class = "vol-slider" id = "vol-slider-two">
+            <header class = "vol-tag-right">VOLUME</header>
+
+        </div>
+        <div id="scratch-container-right">
+            <div id="scratch-disk-right"></div>
+        </div>
+</div>
+
+
+    
+
+
+    
+        
+    </script>
+</body>
+</html>
